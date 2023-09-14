@@ -1,0 +1,26 @@
+name: Upload to S3
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your desired branch
+  # You can customize this trigger to suit your needs (e.g., on tags, pull requests, etc.)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest GitHub-hosted runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-southeast-2  # Replace with your desired AWS region
+
+    - name: Upload files to S3
+      run: |
+        aws s3 cp C:\CPE\automation\.github\workflows\s3Objects-sswamina.txt s3://automation-workshop-ash/
