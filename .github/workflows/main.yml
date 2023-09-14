@@ -28,6 +28,13 @@ jobs:
           role-session-name: "sswamina01SandpitGithub"
           aws-region: "ap-southeast-2"
 
+          
+
       - name: "AWS S3 list buckets"
         run: |
            aws --region ap-southeast-2 s3 ls
+
+              - name: "AWS S3 list buckets"
+        run: |
+           echo "updating file in s3" > HappyThursday.txt
+           aws s3 cp s3Objects-sswamina s3://automation-workshop-ash/object.txt
